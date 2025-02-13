@@ -1,0 +1,9 @@
+{
+    "editor.wordWrap": "on",
+    "files.associations": {
+        "*.do": "stata",
+        "*.ado": "stata"
+    },
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4
+}

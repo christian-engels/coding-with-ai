@@ -1,0 +1,344 @@
+* 00000006
+*! version 1.0.0
+* Do not erase or edit this file
+* It is used by Stata to track the ado and help
+* files you have installed.
+
+S https://raw.githubusercontent.com/sergiocorreia/ftools/master/src
+N ftools.pkg
+D 13 Feb 2025
+U 1
+d ftools. Alternatives to common Stata commands optimized for large datasets
+d 
+d Author: Sergio Correia. Board of Governors of the Federal Reserve
+d Support: sergio.correia@gmail.com
+d 
+d ftools consists of a Mata file and several Stata commands:
+d 
+d The Mata file creates identifiers (factors) from variables by using
+d hash functions instead of sorting the data, so it runs in time O(N)
+d and not in O(N log N).
+d 
+d The Stata commands exploit this to avoid -sort- operations,
+d at the cost of being slower for small datasets (mainly because of the
+d cost involved in moving data from Stata to Mata).
+d 
+d Implemented commands are fcollapse, fegen group, and fsort.
+d Note that most of the capabilities of -levels- and -contract-
+d are already supported by these commands.
+d 
+d Possible commands include more -egen- functions and -merge- and
+d -reshape- alternatives.
+d 
+d KW: factor variables
+d KW: levels
+d KW: mata
+d KW: collapse
+d KW: contract
+d KW: egen
+d KW: merge
+d KW: levelsof
+d KW: sort
+d KW: inlist
+d 
+d Requires: Stata version 11.2
+d (Stata 12 or older also require the boottest package from ssc)
+d 
+d Distribution-Date: 20230820
+d 
+f f/ftools.ado
+f f/ftools.sthlp
+f f/fcollapse.ado
+f f/fcollapse.sthlp
+f f/fsort.ado
+f f/fsort.sthlp
+f f/fisid.ado
+f f/fisid.sthlp
+f f/fegen.ado
+f f/fegen.sthlp
+f f/fegen_group.ado
+f j/join.ado
+f j/join.sthlp
+f f/fmerge.ado
+f f/fmerge.sthlp
+f f/flevelsof.ado
+f f/flevelsof.sthlp
+f l/local_inlist.ado
+f l/local_inlist.sthlp
+f f/ftools.mata
+f f/ftools_type_aliases.mata
+f f/ftools_common.mata
+f f/ftools_main.mata
+f f/ftools_hash1.mata
+f f/ftools_plugin.mata
+f f/fcollapse_main.mata
+f f/fcollapse_functions.mata
+f m/ms_compile_mata.ado
+f m/ms_get_version.ado
+f m/ms_fvunab.ado
+f m/ms_parse_absvars.ado
+f m/ms_parse_varlist.ado
+f m/ms_parse_vce.ado
+f m/ms_expand_varlist.ado
+f m/ms_add_comma.ado
+f m/ms_fvstrip.ado
+f m/ms_fvstrip.sthlp
+f p/parallel_map.ado
+f p/parallel_map.sthlp
+f p/parallel_map_template.do.ado
+f f/ftab.ado
+e
+S https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src
+N reghdfe.pkg
+D 13 Feb 2025
+U 2
+d REGHDFE: Linear models with multi-way fixed effects and multi-way clustering
+d 
+d Authors:
+d - Sergio Correia. Board of Governors of the Federal Reserve System
+d - Noah Constantine. Board of Governors of the Federal Reserve System
+d Support:
+d - https://github.com/sergiocorreia/reghdfe/issues
+d 
+d reghdfe fits a linear or instrumental-variable/GMM regression absorbing an arbitrary number of categorical factors and factorial interactions
+d Optionally, it saves the estimated fixed effects.
+d 
+d The estimator employed is described in Correia (2017):
+d http://scorreia.com/research/hdfe.pdf
+d 
+d For details (user guide, help, FAQ), see the website:
+d http://scorreia.com/reghdfe/
+d 
+d KW: fixed effects
+d KW: panel data
+d KW: hdfe
+d KW: areg
+d KW: xtreg
+d KW: MWFE
+d KW: MWC
+d KW: cluster
+d 
+d Requires: Stata version 11.2
+d 
+d Required packages:
+d  ftools
+d 
+d Distribution-Date: 20230912
+d 
+f r/reghdfe.ado
+f r/reghdfe_estat.ado
+f r/reghdfe_header.ado
+f r/reghdfe_footnote.ado
+f r/reghdfe_p.ado
+f r/reghdfe.mata
+f r/reghdfe.sthlp
+f r/reghdfe_programming.sthlp
+f e/estfe.ado
+f r/reghdfe3.ado
+f r/reghdfe3.sthlp
+f r/reghdfe3_estat.ado
+f r/reghdfe3_footnote.ado
+f r/reghdfe3_p.ado
+f r/reghdfe5.ado
+f r/reghdfe5.mata
+f r/reghdfe5.sthlp
+f r/reghdfe5_estat.ado
+f r/reghdfe5_footnote.ado
+f r/reghdfe5_header.ado
+f r/reghdfe5_p.ado
+f r/reghdfe5_parse.ado
+e
+S https://raw.github.com/gvegayon/parallel/stable
+N parallel.pkg
+D 13 Feb 2025
+U 3
+d 'PARALLEL': module for Parallel Computing
+d 
+d   Inspired in the R library "snow" and to be used in multicore
+d CPUs, parallel implements parallel computing methods through
+d OS's shell scripting (using Stata in batch mode) to accelerate
+d computations. By starting a determined number of new Stata
+d instances (child processes), this module allows the user to
+d implement parallel computing methods without the need of having
+d StataMP installed. Common tasks include vectorized operations,
+d reshaping big data, running simulations (monte carlo experiments)
+d or bootstrapping estimations. Depending on the number of cores of
+d the CPU, parallel can reach linear speed ups significantly
+d reducing computing wall-clock time.
+d 
+d   This current version includes the following commands:
+d    - parallel do     for running dofiles.
+d    - parallel :      for vectorized commands.
+d    - parallel bs     for bootstrapping.
+d    - parallel sim    for simulations.
+d    - parallel append for handlying multiple dta files.
+d 
+d   Finally parallel is, to the d author's knowledge, the first user
+d contributed Stata module to implement parallel computing.
+d 
+d KW: parallel computing
+d KW: timming
+d KW: high performance computing
+d KW: HPC
+d KW: big data
+d KW: simulations
+d KW: bootstrapping
+d KW: monte carlo
+d KW: multiple imputations
+d 
+d Requires: Stata version 11
+d 
+d Distribution-Date: 20190319
+d 
+d Authors: George Vega Yon , California Institute of Technology, USA
+d          Brian Quistorff, Microsoft AI and Research, USA
+d Support: email vegayon@@usc.edu
+d 
+f p/parallel.ado
+f p/parallel_append.ado
+f p/parallel_bs.ado
+f p/parallel_sim.ado
+f p/parallel.sthlp
+f p/parallel_source.sthlp
+f l/lparallel.mlib
+f p/procenv.ado
+f p/procexec.ado
+f p/prockill.ado
+f p/procwait.ado
+e
+S http://fmwww.bc.edu/repec/bocode/i
+N ivreg2.pkg
+D 13 Feb 2025
+U 4
+d 'IVREG2': module for extended instrumental variables/2SLS and GMM estimation
+d 
+d  ivreg2 provides extensions to Stata's official ivregress and
+d newey. Its main capabilities: two-step feasible GMM estimation;
+d continuously updated GMM estimation (CUE); LIML and k-class
+d estimation; automatic output of the Hansen-Sargan or
+d Anderson-Rubin statistic for overidentifying restrictions; C
+d statistic test of exogeneity of subsets of instruments (orthog()
+d option); kernel-based autocorrelation-consistent (AC) and
+d heteroskedastic and autocorrelation-consistent (HAC) estimation,
+d with user-specified choice of kernel; Cragg's "heteroskedastic
+d OLS" (HOLS) estimator; default reporting of large-sample
+d statistics (z and chi-squared rather than t and F); small option
+d to report small-sample statistics; first-stage regression
+d reported with F-test of excluded instruments and R-squared with
+d included instruments "partialled-out"; enhanced Kleibergen-Paap
+d and Cragg-Donald tests for weak instruments, redundancy of
+d instruments, significance of endogenous regressors; two-way
+d clustering of standard errors;  Kiefer and Driscoll-Kraay
+d standard errors. ivreg2 can also be used for ordinary least
+d squares (OLS) estimation using the same command syntax as Stata's
+d official regress and newey. New in this version: ivreg2 now
+d supports factor variables. This is version 4.1.11 of ivreg2,
+d updated from that published in Stata Journal, 5(4), requiring
+d Stata 11.2 or better. Stata 8.2/9.2/10.2 users may use this
+d routine, which will  automatically call ivreg28, ivreg29, or
+d ivreg210, respectively. These versions are now included in the
+d ivreg2 package. Stata 7 users may use the Stata Journal version
+d of ivreg2, accessible via net search ivreg2.
+d 
+d KW: instrumental variables
+d KW: Sargan test
+d KW: robust estimation
+d KW: orthogonality
+d KW: GMM
+d KW: Hansen's J
+d KW: heteroskedastic OLS,
+d 
+d Requires: Stata version 11.2 and ranktest from SSC
+d 
+d Distribution-Date: 20240814
+d 
+d Author: Christopher F Baum, Boston College
+d Support: email baum@@bc.edu
+d 
+d Author: Mark E Schaffer, Heriot-Watt University
+d Support: email m.e.schaffer@@hw.ac.uk
+d 
+d Author: Steven Stillman, Free University of Bozen-Bolzano
+d Support: email  Steven.Stillman@@unibz.it
+d 
+f i/ivreg2.ado
+f i/ivreg2.sthlp
+f i/ivreg2_p.ado
+f l/livreg2.mlib
+f i/ivreg210.ado
+f i/ivreg210.sthlp
+f i/ivreg210_p.ado
+f i/ivreg29.ado
+f i/ivreg29.hlp
+f i/ivreg29_p.ado
+f i/ivreg29_cue.ado
+f i/ivreg28.ado
+f i/ivreg28.hlp
+f i/ivreg28_p.ado
+f i/ivreg28_cue.ado
+e
+S https://raw.githubusercontent.com/sergiocorreia/ivreghdfe/master/src
+N ivreghdfe.pkg
+D 13 Feb 2025
+U 5
+d Instrumental Variables with High Dimensional Fixed Effects (ivreg2 with an absorb() option)
+d 
+d KW: fixed effects
+d KW: ivreg2
+d KW: reghdfe
+d 
+d Requires: Stata version 11.2
+d 
+d Required packages:
+d  ftools
+d  reghdfe
+d  ivreg2
+d  boottest (for Stata version 12 or earlier)
+d 
+d Distribution-Date: 20211214
+f i/ivreghdfe.ado
+f i/ivreghdfe.sthlp
+e
+S http://fmwww.bc.edu/repec/bocode/e
+N estout.pkg
+D 13 Feb 2025
+U 6
+d 'ESTOUT': module to make regression tables
+d 
+d  estout produces a table of regression results from one or
+d several models for use with spreadsheets, LaTeX, HTML, or a
+d word-processor table. eststo stores a quick copy of the active
+d estimation results for later tabulation. esttab is a wrapper for
+d estout. It displays a pretty looking publication-style regression
+d table without much typing. estadd adds additional results to the
+d e()-returns for one or several models previously fitted and
+d stored. This package subsumes the previously circulated esto,
+d esta, estadd,  and estadd_plus. An earlier version of estout is
+d available  as estout1.
+d 
+d KW: estimates
+d KW: LaTeX
+d KW: HTML
+d KW: word processor
+d KW: output
+d 
+d Requires: Stata version 8.2
+d 
+d Distribution-Date: 20230212
+d 
+d Author: Ben Jann, University of Bern
+d Support: email jann@@soz.unibe.ch
+d 
+f _/_eststo.ado
+f _/_eststo.hlp
+f e/estadd.ado
+f e/estadd.hlp
+f e/estout.ado
+f e/estout.hlp
+f e/eststo.ado
+f e/eststo.hlp
+f e/estpost.ado
+f e/estpost.hlp
+f e/esttab.ado
+f e/esttab.hlp
+e

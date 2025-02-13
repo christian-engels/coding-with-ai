@@ -1,0 +1,18 @@
+,est1
+Dependent Var.:,Log wage
+ , 
+Log employment,-0.1066** 
+,(0.0493)  
+Log capital, 0.0575*  
+ ,(0.0321)  
+log industry output, 0.2187***
+   ,(0.0686)  
+Fixed-Effects:,----------
+Firm,Yes
+Year,Yes
+Industry,Yes
+___________________,__________
+S.E.: Clustered,by: Firm
+Observations,"1,031"
+R2,0.92766
+Within R2,0.04966
