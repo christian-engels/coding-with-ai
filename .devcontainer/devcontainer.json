@@ -13,7 +13,8 @@
                 "RDebugger.r-debugger",
                 "janisdd.vscode-edit-csv",
                 "mechatroner.rainbow-csv",
-                "formulahendry.code-runner"
+                "formulahendry.code-runner",
+                "Posit.air-vscode"
             ],
             "settings": {
                 "editor.tabSize": 2,
@@ -44,6 +45,8 @@
                     "editor.wordWrap": "on"
                 },
                 "[r]": {
+                    "editor.defaultFormatter": "Posit.air-vscode",
+                    "editor.formatOnSave": true,
                     "editor.tabSize": 2,
                     "editor.insertSpaces": true,
                     "editor.detectIndentation": false,
