@@ -14,22 +14,22 @@
 # Install required packages if needed (uncomment if required)
 # !pip install pandas numpy matplotlib seaborn
 
-# Import libraries
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from datetime import date, timedelta
 
+import matplotlib.pyplot as plt
+import numpy as np
+# Import libraries
+import pandas as pd
+import seaborn as sns
+
 # Load datasets
-starwars = pd.read_csv('data/starwars.csv')
-flights = pd.read_csv('data/flights.csv')
-planes = pd.read_csv('data/planes.csv')
-billboard = pd.read_csv('data/billboard.csv')
+starwars = pd.read_csv('../data/starwars.csv')
+flights = pd.read_csv('../data/flights.csv')
+planes = pd.read_csv('../data/planes.csv')
+billboard = pd.read_csv('../data/billboard.csv')
 
 # Display starwars dataset
 print(starwars)
-
 
 # ----------------------------------------------------------
 #   1. Introduction to Tidy Data
@@ -116,13 +116,9 @@ print(upper_chars[['name', 'hair_color', 'skin_color', 'eye_color']].head(5))
 height_by_species_gender = starwars.groupby(['species', 'gender'])['height'].mean().reset_index()
 print(height_by_species_gender.head())
 
-# Danger of ignoring NA
+# Mean of height (automatically ignoring NAs)
 mean_height_with_na = starwars['height'].mean()
 print(f"Mean height with NAs: {mean_height_with_na}")
-
-# With dropna=True (equivalent to na.rm=TRUE)
-mean_height_without_na = starwars['height'].dropna().mean()
-print(f"Mean height without NAs: {mean_height_without_na}")
 
 # Summarize and apply across multiple numeric columns
 numeric_cols = starwars.select_dtypes(include=np.number).columns
