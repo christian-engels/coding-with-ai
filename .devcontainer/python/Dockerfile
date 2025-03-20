@@ -1,4 +1,4 @@
-FROM quay.io/jupyter/datascience-notebook:latest
+FROM quay.io/jupyter/scipy-notebook:latest
 
 COPY requirements.txt /tmp/
 
