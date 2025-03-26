@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import pyfixest as pf
 import seaborn as sns
-from statsmodels.api import OLS
-from statsmodels.sandbox.regression.gmm import IV2SLS
 
 # Set a seed for reproducibility
 np.random.seed(42)
@@ -55,18 +54,14 @@ df.head()
 
 # Estimate and display OLS regressions
 # OLS with x1 and x2
-model_ols_1 = OLS(df['y'], df[['x1', 'x2']]).fit()
-print(model_ols_1.summary())
+pf.feols("y ~ x1 + x2", data = df).summary()
 
 # OLS with only x1
-model_ols_2 = OLS(df['y'], df['x1']).fit()
-print(model_ols_2.summary())
-
+pf.feols("y ~ x1", data = df).summary()
 
 # Estimate and display 2SLS (IV) regression
 # 2SLS: y regressed on x1, instrumented by z
-iv_model = IV2SLS(df['y'], df['x1'], df['z']).fit() # y, exogenous, endogenous, instrument
-print(iv_model.summary())
+pf.feols("y ~ 1 | x1 ~ z", data = df).summary()
 
 
 # Function to perform one iteration of the simulation
@@ -75,12 +70,9 @@ def get_one_iteration(iteration):
     df = generate_full_data(obs, true_beta, mean_vector, covariance_matrix)
 
     # Estimate OLS and IV regressions
-    model_ols = OLS(df['y'], df['x1']).fit()  # OLS with x1
-    ols_coef = model_ols.params["x1"]
-
-    iv_model = IV2SLS(df['y'], df['x1'], df['z']).fit()  # 2SLS with x1 instrumented by z
-    iv_coef = iv_model.params["x1"]
-
+    ols_coef = pf.feols("y ~ x1", data = df).coef()["x1"]
+    iv_coef = pf.feols("y ~ 1 | x1 ~ z", data = df).coef()["x1"]
+    
     # Extract coefficients and store them in a dictionary
     out = {
         'iter': iteration,  # Iteration number
