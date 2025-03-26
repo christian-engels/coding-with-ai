@@ -35,6 +35,7 @@
                 "r.editor.formatOnSave": true,
                 "r.editor.formatOnType": true,
                 "r.lsp.enabled": true,
+                "r.lsp.diagnostics": false,
                 "keyboard.dispatch": "keyCode",
                 "editor.formatOnSave": true,
                 "editor.formatOnType": true,
